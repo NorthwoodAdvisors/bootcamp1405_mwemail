@@ -5,8 +5,8 @@ This is a sample project for the Big Data Bootcamp.
 This is NOT enterprise-ready software. 
 
 Software Used:
-+Python 2.7
-+Avro 1.7.6
++ Python 2.7
++ Avro 1.7.6
 	
 1. Avro
 -------
