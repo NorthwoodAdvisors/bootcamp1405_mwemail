@@ -45,7 +45,7 @@ def hash_message(mail, message_id):
     msg_hash = {}
     msg = email.message_from_string(mail)
 
-    msg_subject = msg['Subject']
+    msg_subject = clean_text(msg['Subject'], '', '')
     msg_from = clean_address(msg.get_all('from', []))
     msg_to = clean_addresses(msg.get_all('to', []))
     msg_cc = clean_addresses(msg.get_all('cc', []))
@@ -53,7 +53,7 @@ def hash_message(mail, message_id):
     msg_received = msg['Received']
     msg_content_type = msg.get_content_type()
     msg_charset = msg.get_content_charset()
-    msg_payload = clean_payload(msg.get_payload(), msg_content_type, msg_charset)
+    msg_payload = clean_text(msg.get_payload(), msg_content_type, msg_charset)
 
     msg_hash = dict()
     msg_hash['message_id'] = message_id
@@ -94,15 +94,27 @@ def clean_date(date_string):
     iso_time = time.strftime("%Y-%m-%dT%H:%M:%S", tuple_time)
     return iso_time
 
-def clean_payload(payload, content_type, charset):
+def clean_text(text, content_type, charset):
     if(charset):
         pass
     else:
         charset = 'us-ascii'
-    body = payload.decode(charset)
+    text = text.decode(charset)
     if content_type == 'text/html':
-        body = strip_tags(body)
-    return body
+        text = strip_tags(text)
+    text = remove_non_ascii(text)
+    text = trim_white_space(text)
+    return text
+
+def remove_non_ascii(text):
+    return ''.join([i if ord(i) < 128 else '-' for i in text])
+
+def trim_white_space(text):
+    text = text.replace('\n', ' ')
+    text = text.replace('\r', ' ')
+    text = text.replace('\t', ' ')
+    ' '.join(text.split())
+    return text
 
 def strip_tags(html):
     s = TagRemover()

@@ -10,6 +10,10 @@
          ]
       },
       {
+         "name":"message_id",
+         "type":"int"
+      },
+      {
          "name":"body",
          "type":[
             "string",

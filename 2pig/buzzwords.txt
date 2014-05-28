@@ -1,0 +1,11 @@
+hadoop
+big data
+analytics
+cloud
+predictive
+data science
+data scientist
+nosql
+unstructured data
+data visualization
+data discovery
