@@ -9,6 +9,7 @@ Software Used:
 + Avro 1.7.6
 + Pig 0.12.0
 + Jython 2.5.3
+
 	
 1. Avro
 -------
@@ -18,4 +19,9 @@ To run ./1avro/emails.py as-is, you need to put some Thunderbird wdseml email fi
 
 2. Pig
 ------
-To have a little fun with the emails once they are serialized with Avro, I use Pig to count "big data buzzwords" occurring in the email subject and body. This includes a python UDF.
+To have a little fun with the emails once they are serialized with Avro, I use Pig to count "big data buzzwords" occurring in the email subject and body, then aggregate the counts. This includes a python UDF to count the buzzwords.
+
+
+3. D3.JS
+--------
+I created some very simple visualizations using the D3.JS javascript library.
